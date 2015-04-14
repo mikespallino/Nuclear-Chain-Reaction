@@ -9,6 +9,9 @@ public class CrystalSimulation implements Simulation {
 	public static ArrayList<Neutron> neutronAddQueue = new ArrayList<Neutron>();
 	public static ArrayList<Neutron> neutronRemoveQueue = new ArrayList<Neutron>();
 	
+	public static ArrayList<Atom> krypton = new ArrayList<Atom>();
+	public static ArrayList<Atom> bromine = new ArrayList<Atom>();
+	
 	private boolean finished = false;
 	
 	public long energyReleased = 0;
@@ -38,6 +41,8 @@ public class CrystalSimulation implements Simulation {
 		neutrons.clear();
 		neutronAddQueue.clear();
 		neutronRemoveQueue.clear();
+		bromine.clear();
+		krypton.clear();
 		//neutrons.add(new Neutron(Math.random() * (WIDTH - 20), Math.random() * (HEIGHT - 30)));
 		neutrons.add(new Neutron(0,0));
 		neutrons.get(0).setDx(1);
@@ -53,13 +58,19 @@ public class CrystalSimulation implements Simulation {
 		for(Neutron n: neutrons) {
 			g2d.fillOval((int) n.getX(), (int) n.getY(), 2, 2);
 		}
+		g2d.setColor(Color.GREEN);
 		for(Atom a : atoms) {
-			if(a.getState()) {
-				g2d.setColor(Color.RED);
-			} else {
-				g2d.setColor(Color.GREEN);
+			if(!a.getState()) {
+				g2d.fillOval((int) a.getX(), (int) a.getY(), 10, 10);
 			}
-			g2d.fillOval((int) a.getX(), (int) a.getY(), 10, 10);
+		}
+		g2d.setColor(Color.ORANGE);
+		for(Atom a : krypton) {
+			g2d.fillOval((int) a.getX(), (int) a.getY(), 5, 5);
+		}
+		g2d.setColor(Color.BLUE);
+		for(Atom a : bromine) {
+			g2d.fillOval((int) a.getX(), (int) a.getY(), 5, 5);
 		}
 		if(neutrons.size() ==0) {
 			for(Atom a: atoms) {
@@ -88,6 +99,26 @@ public class CrystalSimulation implements Simulation {
 			}
 			if(n.getY() < 0 || n.getY() > Main.HEIGHT) {
 				neutronRemoveQueue.add(n);
+			}
+		}
+		for(int i = 0; i < krypton.size(); i++) {
+			Atom a = krypton.get(i);
+			a.update();
+			if(a.getX() < 0 || a.getX() > Main.WIDTH - 20) {
+				krypton.remove(i);
+			}
+			if(a.getY() < 0 || a.getY() > Main.HEIGHT - 110) {
+				krypton.remove(i);
+			}
+		}
+		for(int i = 0; i < bromine.size(); i++) {
+			Atom a = bromine.get(i);
+			a.update();
+			if(a.getX() < 0 || a.getX() > Main.WIDTH - 20) {
+				bromine.remove(i);
+			}
+			if(a.getY() < 0 || a.getY() > Main.HEIGHT - 110) {
+				bromine.remove(i);
 			}
 		}
 		neutrons.addAll(neutronAddQueue);

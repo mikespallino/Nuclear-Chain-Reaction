@@ -13,13 +13,15 @@ public class Neutron {
 		x += dx;
 		y += dy;
 		for(Atom a: atoms) {
-			if(x > a.getX() && x < a.getX()+10 && y > a.getY() && y < a.getY()+10) {
-				if(!a.getState()) {
-					a.trigger();
-					if(Main.randomSimType) {
-						RandomSimulation.neutronRemoveQueue.add(this);
-					} else {
-						CrystalSimulation.neutronRemoveQueue.add(this);
+			if(a != null) {
+				if(x > a.getX() && x < a.getX()+10 && y > a.getY() && y < a.getY()+10) {
+					if(!a.getState()) {
+						a.trigger();
+						if(Main.randomSimType) {
+							RandomSimulation.neutronRemoveQueue.add(this);
+						} else {
+							CrystalSimulation.neutronRemoveQueue.add(this);
+						}
 					}
 				}
 			}

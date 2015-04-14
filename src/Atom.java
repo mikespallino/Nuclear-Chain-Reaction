@@ -5,10 +5,18 @@ public class Atom {
 	
 	public Atom(double x, double y) {
 		state = false;
-		this.setX(x);
-		this.setY(y);
-		setDx(0);
-		setDy(0);
+		this.x = x;
+		this.y = y;
+		this.dx = 0;
+		this.dy = 0;
+	}
+	
+	public Atom(double x, double y, double dx, double dy) {
+		state = false;
+		this.x = x;
+		this.y = y;
+		this.dx = dx;
+		this.dy = dy;
 	}
 	
 	public void update() {
@@ -35,10 +43,18 @@ public class Atom {
 			RandomSimulation.neutronAddQueue.add(n1);
 			RandomSimulation.neutronAddQueue.add(n2);
 			RandomSimulation.neutronAddQueue.add(n3);
+			dir = Math.random() * 2 * Math.PI;
+			RandomSimulation.bromine.add(new Atom(x, y, Math.cos(dir), Math.sin(dir)));
+			dir = Math.random() * 2 * Math.PI;
+			RandomSimulation.krypton.add(new Atom(x, y, Math.cos(dir), Math.sin(dir)));
 		} else {
 			CrystalSimulation.neutronAddQueue.add(n1);
 			CrystalSimulation.neutronAddQueue.add(n2);
 			CrystalSimulation.neutronAddQueue.add(n3);
+			dir = Math.random() * 2 * Math.PI;
+			CrystalSimulation.bromine.add(new Atom(x, y, Math.cos(dir), Math.sin(dir)));
+			dir = Math.random() * 2 * Math.PI;
+			CrystalSimulation.krypton.add(new Atom(x, y, Math.cos(dir), Math.sin(dir)));
 		}
 		state = true;
 	}
