@@ -15,7 +15,9 @@ public class Main extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String TITLE = "Nuclear Reaction Demo | ";
-	public static final int WIDTH = 800, HEIGHT = 450, ITERATIONS = 20;
+	public static final int WIDTH = 850, HEIGHT = 450;
+
+	public static int ITERATIONS = 20;
 	
 	private boolean running = false;
 	public static boolean pause = true;
@@ -98,7 +100,7 @@ public class Main extends Canvas implements Runnable {
 					energyReleased += crystalSim.energyReleased;
 					crystalSim.simulationSetup(true);
 				}
-				new Popup("Crystal Plot for " + ITERATIONS + " Iterations", Main.frame, atomsReacted, 13 * ITERATIONS, energyReleased, 13 * ITERATIONS * Simulation.ENERGY_PER_REACTION);				
+				new Popup("Crystal Plot for " + ITERATIONS + " Iterations", Main.frame, atomsReacted, 144 * ITERATIONS, energyReleased, 144 * ITERATIONS * Simulation.ENERGY_PER_REACTION);				
 			}
 		});
 		simulation.add(randomPlot);

@@ -25,26 +25,26 @@ public class Atom {
 	}
 	
 	public void trigger() {
-		Neutron n1 = new Neutron(x -.5, y-.5);
+		Neutron n1 = new Neutron(x, y);
 		double dir = Math.random() * 2 * Math.PI;
 		n1.setDx(1 * Math.cos(dir));
-		n1.setDy(Math.sin(dir));
+		n1.setDy(1 * Math.sin(dir));
 		
-		Neutron n2 = new Neutron(x - .5, y -.5);
+		Neutron n2 = new Neutron(x, y);
 		dir = Math.random() * 2 * Math.PI;
 		n2.setDx(1 * Math.cos(dir));
-		n2.setDy(Math.sin(dir));
+		n2.setDy(1 * Math.sin(dir));
 		
-		Neutron n3 = new Neutron(x - .5, y -.5);
+		Neutron n3 = new Neutron(x, y);
 		dir = Math.random() * 2 * Math.PI;
 		n3.setDx(1 * Math.cos(dir));
-		n3.setDy(Math.sin(dir));
+		n3.setDy(1 * Math.sin(dir));
 		if(Main.randomSimType) {
 			RandomSimulation.neutronAddQueue.add(n1);
 			RandomSimulation.neutronAddQueue.add(n2);
 			RandomSimulation.neutronAddQueue.add(n3);
 			dir = Math.random() * 2 * Math.PI;
-			RandomSimulation.bromine.add(new Atom(x, y, Math.cos(dir), Math.sin(dir)));
+			RandomSimulation.barium.add(new Atom(x, y, Math.cos(dir), Math.sin(dir)));
 			dir = Math.random() * 2 * Math.PI;
 			RandomSimulation.krypton.add(new Atom(x, y, Math.cos(dir), Math.sin(dir)));
 		} else {
@@ -52,7 +52,7 @@ public class Atom {
 			CrystalSimulation.neutronAddQueue.add(n2);
 			CrystalSimulation.neutronAddQueue.add(n3);
 			dir = Math.random() * 2 * Math.PI;
-			CrystalSimulation.bromine.add(new Atom(x, y, Math.cos(dir), Math.sin(dir)));
+			CrystalSimulation.barium.add(new Atom(x, y, Math.cos(dir), Math.sin(dir)));
 			dir = Math.random() * 2 * Math.PI;
 			CrystalSimulation.krypton.add(new Atom(x, y, Math.cos(dir), Math.sin(dir)));
 		}

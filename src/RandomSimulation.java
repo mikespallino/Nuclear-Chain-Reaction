@@ -11,7 +11,7 @@ public class RandomSimulation implements Simulation {
 	public static ArrayList<Neutron> neutronRemoveQueue = new ArrayList<Neutron>();
 	
 	public static ArrayList<Atom> krypton = new ArrayList<Atom>();
-	public static ArrayList<Atom> bromine = new ArrayList<Atom>();
+	public static ArrayList<Atom> barium = new ArrayList<Atom>();
 	
 	public long energyReleased = 0;
 	public int atomsReacted = 0;
@@ -43,7 +43,7 @@ public class RandomSimulation implements Simulation {
 		neutrons.clear();
 		neutronAddQueue.clear();
 		neutronRemoveQueue.clear();
-		bromine.clear();
+		barium.clear();
 		krypton.clear();
 		//neutrons.add(new Neutron(Math.random() * (WIDTH - 20), Math.random() * (HEIGHT - 30)));
 		neutrons.add(new Neutron(0,0));
@@ -71,7 +71,7 @@ public class RandomSimulation implements Simulation {
 			g2d.fillOval((int) a.getX(), (int) a.getY(), 5, 5);
 		}
 		g2d.setColor(Color.BLUE);
-		for(Atom a : bromine) {
+		for(Atom a : barium) {
 			g2d.fillOval((int) a.getX(), (int) a.getY(), 5, 5);
 		}
 		if(neutrons.size() ==0) {
@@ -98,8 +98,7 @@ public class RandomSimulation implements Simulation {
 			n.update(atoms);
 			if(n.getX() < 0 || n.getX() > Main.WIDTH - 20) {
 				neutronRemoveQueue.add(n);
-			}
-			if(n.getY() < 0 || n.getY() > Main.HEIGHT - 110) {
+			} else if(n.getY() < 0 || n.getY() > Main.HEIGHT - 110) {
 				neutronRemoveQueue.add(n);
 			}
 		}
@@ -108,19 +107,17 @@ public class RandomSimulation implements Simulation {
 			a.update();
 			if(a.getX() < 0 || a.getX() > Main.WIDTH - 20) {
 				krypton.remove(i);
-			}
-			if(a.getY() < 0 || a.getY() > Main.HEIGHT - 110) {
+			} else if(a.getY() < 0 || a.getY() > Main.HEIGHT - 110) {
 				krypton.remove(i);
 			}
 		}
-		for(int i = 0; i < bromine.size(); i++) {
-			Atom a = bromine.get(i);
+		for(int i = 0; i < barium.size(); i++) {
+			Atom a = barium.get(i);
 			a.update();
 			if(a.getX() < 0 || a.getX() > Main.WIDTH - 20) {
-				bromine.remove(i);
-			}
-			if(a.getY() < 0 || a.getY() > Main.HEIGHT - 110) {
-				bromine.remove(i);
+				barium.remove(i);
+			} else if(a.getY() < 0 || a.getY() > Main.HEIGHT - 110) {
+				barium.remove(i);
 			}
 		}
 		neutrons.addAll(neutronAddQueue);

@@ -7,6 +7,7 @@ import java.util.Hashtable;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -50,9 +51,12 @@ public class ControlPanel extends JPanel {
 		startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				Main.pause = true;
 				if(Main.randomSimType) {
+					Main.randomSim.simulationSetup(false);
 					RandomSimulation.eventBus.add(new RestartSimulationEvent(this, 1, "Start"));
 				} else {
+					Main.crystalSim.simulationSetup(false);
 					CrystalSimulation.eventBus.add(new RestartSimulationEvent(this, 1, "Start"));
 				}
 				Main.pause = false;
@@ -77,10 +81,10 @@ public class ControlPanel extends JPanel {
 		random.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent arg0) {
+				Main.pause = true;
 				if(random.isSelected()) {
 					Main.randomSimType = true;
 					Main.randomSim.simulationSetup(false);
-					Main.pause = true;
 					crystal.setSelected(false);
 					atoms.setEnabled(true);
 				}
@@ -89,13 +93,25 @@ public class ControlPanel extends JPanel {
 		crystal.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent arg0) {
+				Main.pause = true;
 				if(crystal.isSelected()) {
 					Main.randomSimType = false;
 					Main.crystalSim.simulationSetup(false);
-					Main.pause = true;
 					random.setSelected(false);
 					atoms.setEnabled(false);
 				}
+			}
+		});
+		
+		JLabel iterationLabel = new JLabel("Iterations: ");
+		Integer[] iterations = {0,1,5,10,15,20,25,50,75,100,150,200};
+		JComboBox<Integer> iterationList = new JComboBox<Integer>(iterations);
+		iterationList.setSelectedIndex(5);
+		
+		iterationList.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Main.ITERATIONS = iterations[iterationList.getSelectedIndex()];
 			}
 		});
 		
@@ -104,6 +120,8 @@ public class ControlPanel extends JPanel {
 		add(pauseButton);
 		add(random);
 		add(crystal);
+		add(iterationLabel);
+		add(iterationList);
 	}
 	
 }
